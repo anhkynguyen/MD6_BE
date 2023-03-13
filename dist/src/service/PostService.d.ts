@@ -3,6 +3,7 @@ declare class PostService {
     constructor();
     getAll1: () => Promise<any>;
     save: (post: any) => Promise<any>;
+    updatePost: (idPost: any, newPost: any) => Promise<any>;
     removePost1: (idPost: any) => Promise<any>;
     checkUser1: (idUser: any, idPost: any) => Promise<boolean>;
 }

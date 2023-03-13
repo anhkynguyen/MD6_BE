@@ -1116,6 +1116,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <index id="318" parent="306" name="PRIMARY">
       <ColNames>idPost</ColNames>
+      <NameSurrogate>1</NameSurrogate>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
@@ -1174,6 +1175,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <index id="329" parent="307" name="PRIMARY">
       <ColNames>idUser</ColNames>
+      <NameSurrogate>1</NameSurrogate>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>

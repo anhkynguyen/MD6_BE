@@ -16,6 +16,14 @@ class PostService {
         this.save = async (post) => {
             return this.postRepository.save(post);
         };
+        this.updatePost = async (idPost, newPost) => {
+            let post = await this.postRepository.findOneBy({ idPost: idPost });
+            if (!post) {
+                return null;
+            }
+            await this.postRepository.update({ idPost: idPost }, newPost);
+            return newPost.idUser;
+        };
         this.removePost1 = async (idPost) => {
             let posts = await this.postRepository.findOneBy({ idPost: idPost });
             if (!posts) {
