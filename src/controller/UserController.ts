@@ -13,14 +13,14 @@ class UserController {
     }
 
 
-    // showMyProfile = async (req: Request, res: Response) => {
-    //     try {
-    //         let response = await this.userServices.getMyProfile(req.params.idUser);
-    //         return res.status(200).json(response)
-    //     } catch (e) {
-    //         res.status(500).json(e.message)
-    //     }
-    // }
+    showMyProfile = async (req: Request, res: Response) => {
+        try {
+            let response = await this.userServices.getMyProfile(req.params.idUser);
+            return res.status(200).json(response)
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
 
     checkOldPassword = async (req: Request, res: Response) => {
         try {

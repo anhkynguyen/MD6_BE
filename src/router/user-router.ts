@@ -9,4 +9,5 @@ userRouter.post('/register',UserController.register)
 
 userRouter.post('/login',UserController.login)
 userRouter.get('/off/:id', UserController.checkOff)
+userRouter.get('/showMyProfile/:id', UserController.showMyProfile)
 
