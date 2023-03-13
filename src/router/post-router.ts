@@ -6,7 +6,8 @@ import PostController from "../controller/PostController";
 export const postRouter = Router();
 postRouter.use(auth)
 
-postRouter.get('', PostController.getAllSong)
+postRouter.get('', PostController.getAllPosts)
 postRouter.post('/add', PostController.createPost)
 postRouter.delete('/remove/:idPost', PostController.removePost)
 postRouter.put('/edit/:idPost', PostController.editPost)
+postRouter.get('/showPosts', PostController.getLimitPost)

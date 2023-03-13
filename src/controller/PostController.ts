@@ -14,7 +14,7 @@ class PostController {
 
     }
 
-    getAllSong = async (req: Request, res: Response) => {
+    getAllPosts = async (req: Request, res: Response) => {
         try {
             let data;
             let orders;
@@ -35,9 +35,13 @@ class PostController {
 
 
     createPost = async (req: Request, res: Response) => {
-
         try {
             let posts = await this.postService.save(req.body);
+
+            let a = posts.date.getTime();
+            console.log(8888888888888888,a)
+
+
             res.status(200).json(posts)
         } catch (e) {
             console.log(e)
@@ -45,8 +49,6 @@ class PostController {
         }
 
     }
-
-
 
     editPost = async (req: Request, res: Response) => {
 
@@ -67,9 +69,6 @@ class PostController {
         }
 
     }
-
-
-
 
 
     removePost = async (req: Request, res: Response) => {
@@ -93,6 +92,20 @@ class PostController {
         }
 
     }
+
+
+
+
+     getLimitPost = async (req: Request,res: Response) => {
+
+        try{
+         let posts = await this.postService.get12Post()
+           res.status(200).json(posts)
+       }catch (e){
+            res.status(500).json(e.message)
+         }
+
+     }
 
 
 

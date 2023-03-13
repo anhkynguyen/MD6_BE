@@ -16,6 +16,10 @@ class PostService {
         this.save = async (post) => {
             return this.postRepository.save(post);
         };
+        this.get12Post = async () => {
+            let sql = `SELECT * FROM post ORDER BY date DESC `;
+            return this.postRepository.query(sql);
+        };
         this.updatePost = async (idPost, newPost) => {
             let post = await this.postRepository.findOneBy({ idPost: idPost });
             if (!post) {

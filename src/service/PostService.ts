@@ -34,10 +34,11 @@ class PostService {
     };
 
 
-    // findById = async (idSong) => {
-    //     let songs = await this.songRepository.findOneBy({idSong: idSong})
-    //     return songs
-    // }
+    get12Post = async () => {
+        let sql = `SELECT * FROM post ORDER BY date DESC `;
+        return this.postRepository.query(sql)
+
+    }
 
 
     updatePost = async (idPost, newPost) => {

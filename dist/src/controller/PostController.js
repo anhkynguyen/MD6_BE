@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const PostService_1 = __importDefault(require("../service/PostService"));
 class PostController {
     constructor() {
-        this.getAllSong = async (req, res) => {
+        this.getAllPosts = async (req, res) => {
             try {
                 let data;
                 let orders;
@@ -25,6 +25,8 @@ class PostController {
         this.createPost = async (req, res) => {
             try {
                 let posts = await this.postService.save(req.body);
+                let a = posts.date.getTime();
+                console.log(8888888888888888, a);
                 res.status(200).json(posts);
             }
             catch (e) {
@@ -61,6 +63,15 @@ class PostController {
                 else {
                     res.status(401).json('invalid');
                 }
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.getLimitPost = async (req, res) => {
+            try {
+                let posts = await this.postService.get12Post();
+                res.status(200).json(posts);
             }
             catch (e) {
                 res.status(500).json(e.message);
