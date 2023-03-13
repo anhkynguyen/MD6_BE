@@ -12,4 +12,5 @@ exports.postRouter.use(auth_1.auth);
 exports.postRouter.get('', PostController_1.default.getAllSong);
 exports.postRouter.post('/add', PostController_1.default.createPost);
 exports.postRouter.delete('/remove/:idPost', PostController_1.default.removePost);
+exports.postRouter.put('/edit/:idPost', PostController_1.default.editPost);
 //# sourceMappingURL=post-router.js.map

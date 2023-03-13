@@ -38,20 +38,26 @@ class PostService {
     //     let songs = await this.songRepository.findOneBy({idSong: idSong})
     //     return songs
     // }
-    // updateSong = async (idSong, newSong) => {
-    //
-    //
-    //
-    //     let songs = await this.songRepository.findOneBy({idSong: idSong})
-    //
-    //     // console.log(songs)
-    //     if (!songs) {
-    //         return null
-    //     }
-    //     newSong.count = songs.count;
-    //     await this.songRepository.update({idSong: idSong}, newSong)
-    //     return newSong.idAlbum;
-    // }
+
+
+    updatePost = async (idPost, newPost) => {
+
+
+
+        let post = await this.postRepository.findOneBy({idPost: idPost})
+
+
+        if (!post) {
+            return null
+        }
+
+        await this.postRepository.update({idPost: idPost}, newPost)
+        return newPost.idUser;
+    }
+
+
+
+
     removePost1 = async (idPost) => {
         let posts = await this.postRepository.findOneBy({idPost: idPost});
         if (!posts) {

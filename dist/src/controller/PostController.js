@@ -32,6 +32,23 @@ class PostController {
                 res.status(500).json(e.message);
             }
         };
+        this.editPost = async (req, res) => {
+            try {
+                let idPost = req.params.idPost;
+                let idUser = req["decoded"].idUser;
+                let check = await this.postService.checkUser1(idUser, idPost);
+                if (check === true && (req["decoded"].role === 'seller')) {
+                    let post = await this.postService.updatePost(idPost, req.body);
+                    res.status(200).json(post);
+                }
+                else {
+                    res.status(401).json('invalid');
+                }
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
         this.removePost = async (req, res) => {
             try {
                 let idPost = req.params.idPost;
