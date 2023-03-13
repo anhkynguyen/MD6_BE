@@ -35,7 +35,7 @@ class PostService {
 
 
     get12Post = async () => {
-        let sql = `SELECT * FROM post ORDER BY date DESC `;
+        let sql = `SELECT * FROM post ORDER BY date DESC limit 12`;
         return this.postRepository.query(sql)
 
     }
