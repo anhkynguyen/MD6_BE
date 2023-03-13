@@ -9,11 +9,23 @@ export class Post {
     namePost: string;
     @Column({type: 'text'})
     image: string;
-    @Column()
-    date: number;
+    @Column({
+        nullable: false,
+        default: () => 'DATE_ADD(NOW())',
+        type: 'timestamp',
+    })
+    date: Date;
     @Column()
     description: string;
     @Column()
     idUser: number;
+    @Column()
+    price: number;
+    @Column()
+    height: number;
+    @Column()
+    weight: number;
+    @Column()
+   measurement : string;
 
 }
