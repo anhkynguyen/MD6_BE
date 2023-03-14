@@ -26,8 +26,12 @@ __decorate([
     __metadata("design:type", String)
 ], Post.prototype, "image", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
+    (0, typeorm_1.Column)({
+        nullable: false,
+        default: () => 'DATE_ADD(NOW())',
+        type: 'timestamp',
+    }),
+    __metadata("design:type", Date)
 ], Post.prototype, "date", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
@@ -37,6 +41,22 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Post.prototype, "idUser", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Post.prototype, "price", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Post.prototype, "height", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Post.prototype, "weight", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Post.prototype, "measurement", void 0);
 Post = __decorate([
     (0, typeorm_1.Entity)()
 ], Post);

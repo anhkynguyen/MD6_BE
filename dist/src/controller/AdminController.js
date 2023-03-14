@@ -35,6 +35,26 @@ class AdminController {
                 res.status(500).json(e.message);
             }
         };
+        this.getAskUser = async (req, res) => {
+            try {
+                let response = await this.userServices.getUserRequest();
+                return res.status(200).json(response);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.changeRoleUser = async (req, res) => {
+            console.log(11111111111111111);
+            try {
+                let id = req.params.id;
+                let response = await this.userServices.changeRole(id);
+                return res.status(200).json(response);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
         this.userServices = UserService_1.default;
     }
 }

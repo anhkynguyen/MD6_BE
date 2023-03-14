@@ -49,6 +49,10 @@ __decorate([
     (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
 ], User.prototype, "gender", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: "No" }),
+    __metadata("design:type", String)
+], User.prototype, "ask", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);
