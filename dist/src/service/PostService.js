@@ -13,6 +13,11 @@ class PostService {
             }
             return posts;
         };
+        this.findById = async (id) => {
+            let sql = `select * from user u join post p on u.idUser = p.idUser  where p.idPost = ${id}`;
+            let post = await this.postRepository.query(sql);
+            return post;
+        };
         this.save = async (post) => {
             return this.postRepository.save(post);
         };

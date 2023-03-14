@@ -17,6 +17,7 @@ declare class UserServices {
         gmail: any;
         birthday: any;
         gender: any;
+        status: any;
     }>;
     offline1: (id: any) => Promise<any>;
     changeStatus: (id: any) => Promise<string>;

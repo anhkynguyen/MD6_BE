@@ -21,11 +21,11 @@ class PostService {
         return posts;
     }
 
-    // getMySong = async (idUser) => {
-    //     let sql = `select * from album join song s on album.idAlbum = s.idAlbum join category c on s.idCategory = c.idCategory join user u on album.idUser = u.idUser where u.idUser = ${idUser}`;
-    //     let songs = await this.songRepository.query(sql)
-    //     return songs;
-    // }
+    findById = async (id) => {
+        let sql = `select * from user u join post p on u.idUser = p.idUser  where p.idPost = ${id}`;
+        let post = await this.postRepository.query(sql)
+        return post;
+    }
 
 
 

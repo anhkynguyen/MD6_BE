@@ -7,6 +7,7 @@ declare class PostController {
     editPost: (req: Request, res: Response) => Promise<void>;
     removePost: (req: Request, res: Response) => Promise<void>;
     getLimitPost: (req: Request, res: Response) => Promise<void>;
+    findByIdPost: (req: Request, res: Response) => Promise<void>;
 }
 declare const _default: PostController;
 export default _default;

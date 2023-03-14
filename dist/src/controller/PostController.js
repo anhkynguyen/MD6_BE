@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const PostService_1 = __importDefault(require("../service/PostService"));
+const PostService_2 = __importDefault(require("../service/PostService"));
 class PostController {
     constructor() {
         this.getAllPosts = async (req, res) => {
@@ -72,6 +73,17 @@ class PostController {
             try {
                 let posts = await this.postService.get12Post();
                 res.status(200).json(posts);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.findByIdPost = async (req, res) => {
+            try {
+                console.log(req.params.id);
+                let idPost = req.params.id;
+                let post = await PostService_2.default.findById(idPost);
+                res.status(200).json(post);
             }
             catch (e) {
                 res.status(500).json(e.message);
