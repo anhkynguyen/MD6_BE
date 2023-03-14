@@ -9,6 +9,7 @@ declare class UserController {
     register: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     login: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     checkOff: (req: any, res: any) => Promise<any>;
+    checkRequest: (req: any, res: any) => Promise<any>;
 }
 declare const _default: UserController;
 export default _default;

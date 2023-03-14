@@ -142,8 +142,31 @@ class UserController {
         } catch (e) {
             res.status(500).json(e.message)
         }
-
     }
+
+
+    checkRequest = async (req, res) => {
+        try {
+            let id = req.params.id
+            let response = await this.userServices.userRequest(id)
+            return res.status(200).json(response)
+
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

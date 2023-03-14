@@ -16,6 +16,11 @@ class UserServices {
             let users = await this.userRepository.query(sql);
             return users;
         };
+        this.getUserRequest = async () => {
+            let sql = `select * from user where ask = 'Yes'`;
+            let users = await this.userRepository.query(sql);
+            return users;
+        };
         this.getMyProfile = async (idUser) => {
             let users = await this.userRepository.findOneBy({ idUser: idUser });
             return users;
@@ -144,6 +149,38 @@ class UserServices {
                 return null;
             }
             return this.userRepository.delete({ idUser: id });
+        };
+        this.userRequest = async (id) => {
+            let checkUser = await this.userRepository.findOneBy({ idUser: id });
+            if (!checkUser) {
+                return null;
+            }
+            else {
+                if (checkUser.ask === 'No') {
+                    checkUser.ask = 'Yes';
+                    await this.userRepository.save(checkUser);
+                }
+            }
+        };
+        this.changeRole = async (id) => {
+            console.log(2222222222);
+            let checkUser = await this.userRepository.findOneBy({ idUser: id });
+            if (!checkUser) {
+                return null;
+            }
+            else {
+                const d = new Date();
+                let year = d.getFullYear();
+                console.log(year - checkUser.birthday.split('-')[0]);
+                if (checkUser.role === 'user' && year - checkUser.birthday.split('-')[0] > 18) {
+                    checkUser.role = 'seller';
+                    await this.userRepository.save(checkUser);
+                    return " Bạn đã đăng ký thành công";
+                }
+                else {
+                    return 'Bạn chưa đủ tuổi';
+                }
+            }
         };
         this.userRepository = data_source_1.AppDataSource.getRepository(user_1.User);
     }

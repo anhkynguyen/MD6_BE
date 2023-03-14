@@ -8,5 +8,7 @@ adminRouter.use(auth);
 adminRouter.get('', adminAuth, adminController.getAllUser)
 adminRouter.get('/lock/:id', adminController.lockUser)
 adminRouter.delete('/:id', adminController.remove)
+adminRouter.get('/checkAsk',adminController.getAskUser)
+adminRouter.get('/changeRole/:id',adminController.changeRoleUser)
 
 

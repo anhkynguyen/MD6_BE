@@ -13,4 +13,6 @@ exports.adminRouter.use(auth_1.auth);
 exports.adminRouter.get('', admin_1.adminAuth, AdminController_1.default.getAllUser);
 exports.adminRouter.get('/lock/:id', AdminController_1.default.lockUser);
 exports.adminRouter.delete('/:id', AdminController_1.default.remove);
+exports.adminRouter.get('/checkAsk', AdminController_1.default.getAskUser);
+exports.adminRouter.get('/changeRole/:id', AdminController_1.default.changeRoleUser);
 //# sourceMappingURL=admin-router.js.map

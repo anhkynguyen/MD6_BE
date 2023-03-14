@@ -20,4 +20,6 @@ export class User {
     birthday: string;
     @Column({ type: "text" })
     gender: string;
+    @Column({ default: "No" })
+    ask: string;
 }

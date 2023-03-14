@@ -8,4 +8,5 @@ export declare class User {
     status: string;
     birthday: string;
     gender: string;
+    ask: string;
 }

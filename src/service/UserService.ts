@@ -21,6 +21,16 @@ class UserServices {
         return users;
     }
 
+
+    getUserRequest = async () => {
+        let sql = `select * from user where ask = 'Yes'`
+        let users = await this.userRepository.query(sql);
+        return users;
+    }
+
+
+
+
     getMyProfile = async (idUser) => {
         let users = await this.userRepository.findOneBy({idUser: idUser});
         return users;
@@ -190,17 +200,57 @@ class UserServices {
         }
         return this.userRepository.delete({idUser: id})
     }
-    //
-    // showHome = async (id)=>{
-    //     let user = await this.userRepository.findOneBy({idUser: id});
-    //     if(!user) {
-    //         return null;
-    //     }
-    //     else {
-    //
-    //     }
-    //
-    // }
+
+
+
+    userRequest = async (id)=>{
+        let checkUser = await this.userRepository.findOneBy({idUser :id})
+        if(!checkUser) {
+            return null
+        }
+        else {
+            if(checkUser.ask === 'No'){
+                checkUser.ask = 'Yes'
+                await this.userRepository.save(checkUser)
+
+            }
+        }
+
+    }
+
+
+
+    changeRole = async (id)=>{
+        console.log(2222222222)
+        let checkUser = await this.userRepository.findOneBy({idUser :id})
+        if(!checkUser) {
+            return null
+        }
+        else {
+            const d = new Date();
+            let year = d.getFullYear();
+
+            console.log(year - checkUser.birthday.split('-')[0] )
+            if(checkUser.role === 'user' && year - checkUser.birthday.split('-')[0] > 18){
+                checkUser.role = 'seller'
+                await this.userRepository.save(checkUser)
+                return " Bạn đã đăng ký thành công"
+            }
+            else {
+                return 'Bạn chưa đủ tuổi'
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 }
 
 export default new UserServices();
