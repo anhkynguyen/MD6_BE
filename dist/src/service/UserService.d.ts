@@ -14,6 +14,9 @@ declare class UserServices {
         role: any;
         avatar: any;
         token: string;
+        gmail: any;
+        birthday: any;
+        gender: any;
     }>;
     offline1: (id: any) => Promise<any>;
     changeStatus: (id: any) => Promise<string>;

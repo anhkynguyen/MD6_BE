@@ -32,7 +32,9 @@ class UserController {
     constructor() {
         this.showMyProfile = async (req, res) => {
             try {
-                let response = await this.userServices.getMyProfile(req.params.idUser);
+                let id = req.params;
+                console.log(6666666666666, id.id);
+                let response = await this.userServices.getMyProfile(id.id);
                 return res.status(200).json(response);
             }
             catch (e) {

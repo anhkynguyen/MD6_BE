@@ -10,7 +10,7 @@ class PostController {
             try {
                 let data;
                 let orders;
-                let posts = await this.postService.getAll1();
+                let posts = await this.postService.getAll2();
                 if (req["decoded"]) {
                     data = [posts, orders];
                 }

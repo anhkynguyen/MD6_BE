@@ -15,7 +15,9 @@ class UserController {
 
     showMyProfile = async (req: Request, res: Response) => {
         try {
-            let response = await this.userServices.getMyProfile(req.params.idUser);
+            let id = req.params
+            console.log(6666666666666,id.id)
+            let response = await this.userServices.getMyProfile(id.id);
             return res.status(200).json(response)
         } catch (e) {
             res.status(500).json(e.message)

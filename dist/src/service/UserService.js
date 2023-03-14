@@ -22,6 +22,7 @@ class UserServices {
             return users;
         };
         this.getMyProfile = async (idUser) => {
+            console.log(7777777777, idUser);
             let users = await this.userRepository.findOneBy({ idUser: idUser });
             return users;
         };
@@ -101,7 +102,10 @@ class UserServices {
                             username: userCheck.username,
                             role: userCheck.role,
                             avatar: userCheck.avatar,
-                            token: token
+                            token: token,
+                            gmail: userCheck.gmail,
+                            birthday: userCheck.birthday,
+                            gender: userCheck.gender
                         };
                         return userRes;
                     }

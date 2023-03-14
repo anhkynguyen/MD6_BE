@@ -11,7 +11,7 @@ class PostService {
 
     }
 
-    getAll1 = async () => {
+    getAll2 = async () => {
         let sql = `select * from post p join user u on p.idUser = u.idUser`;
         let posts = await this.postRepository.query(sql);
         console.log(posts)
