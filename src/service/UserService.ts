@@ -119,7 +119,10 @@ class UserServices {
                         username: userCheck.username,
                         role: userCheck.role,
                         avatar: userCheck.avatar,
-                        token : token
+                        token : token,
+                        gmail:userCheck.gmail,
+                        birthday: userCheck.birthday,
+                        gender : userCheck.gender
                     }
                     return userRes;
                 }
