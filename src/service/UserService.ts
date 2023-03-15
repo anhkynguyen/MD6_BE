@@ -3,6 +3,7 @@ import {AppDataSource} from "../data-source";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {SECRET} from "../middleware/auth";
+import * as nodemailer from 'nodemailer';
 
 
 class UserServices {
@@ -184,6 +185,33 @@ class UserServices {
             if (checkUser.category === 'Wait') {
                 checkUser.category = 'Add'
                 await this.userRepository.save(checkUser)
+
+                let email = checkUser.gmail
+                console.log(111111111111,email)
+                let transporter = nodemailer.createTransport({
+                    service: "gmail",
+                    auth: {
+                        user: 'tranhoangloc502@gmail.com', // Địa chỉ email của bạn
+                        pass: 'enlixpabkfmylwhr', // Mật khẩu của bạn
+
+                    },
+                });
+
+
+// // Gửi email
+                await transporter.sendMail({
+                        from: 'tranhoangloc502@gmail.com', // Địa chỉ email của bạn
+                        to: `${email}`, // Địa chỉ email của người nhận
+                        subject: 'Đăng ký thành công',
+                        text: 'Chúc mừng! Bạn đã đăng ký thành công.',
+                    },
+                    (error, info) => {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + 'lalalalala');
+                        }
+                    });
 
 
             }
