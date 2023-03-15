@@ -1,6 +1,5 @@
 import {Request, Response} from "express";
 import UserService from "../service/UserService";
-import * as nodemailer from 'nodemailer';
 
 
 class UserController {
@@ -69,45 +68,11 @@ class UserController {
         try {
             let user = await this.userServices.register1(req.body);
 
-
-            let email = req.body.gmail
-            console.log(111111111111)
-            let transporter = nodemailer.createTransport({
-                service: "gmail",
-                auth: {
-                    user: 'tranhoangloc502@gmail.com', // Địa chỉ email của bạn
-                    pass: 'enlixpabkfmylwhr', // Mật khẩu của bạn
-
-                },
-            });
-
-
-
-// // Gửi email
-            await transporter.sendMail({
-                    from: 'tranhoangloc502@gmail.com', // Địa chỉ email của bạn
-                    to: `${email}`, // Địa chỉ email của người nhận
-                    subject: 'Đăng ký thành công',
-                    text: 'Chúc mừng! Bạn đã đăng ký thành công.',
-                },
-                (error, info) => {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log('Email sent: ' + 'lalalalala');
-                    }
-                });
-
-
-
             return res.status(201).json(user)
         } catch (e) {
             res.status(500).json(e.message)
         }
     }
-
-
-
 
 
     login = async (req: Request, res: Response) => {
@@ -155,16 +120,6 @@ class UserController {
             res.status(500).json(e.message)
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

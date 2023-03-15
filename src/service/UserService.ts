@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {SECRET} from "../middleware/auth";
 
+
 class UserServices {
     private userRepository;
 
@@ -15,30 +16,30 @@ class UserServices {
     }
 
     getAll1 = async () => {
-        let sql = `select * 
-                   from  user where role = 'user'`
+        let sql = `select *
+                   from user
+                   where role = 'user'`
         let users = await this.userRepository.query(sql);
         return users;
     }
 
 
     getUserRequest = async () => {
-        let sql = `select * from user where category = 'Wait'`
+        let sql = `select *
+                   from user
+                   where category = 'Wait'`
         let users = await this.userRepository.query(sql);
         return users;
     }
-
-
-
 
 
     getWaitUser = async () => {
-        let sql = `select * from user where category = 'Wait'`
+        let sql = `select *
+                   from user
+                   where category = 'Wait'`
         let users = await this.userRepository.query(sql);
         return users;
     }
-
-
 
 
     getMyProfile = async (idUser) => {
@@ -100,8 +101,7 @@ class UserServices {
         } else {
             if (userCheck.status === 'lock' || userCheck.category === 'Wait') {
                 return "your account has been locked";
-            }
-            else {
+            } else {
                 let passwordCompare = await bcrypt.compare(user.password, userCheck.password);
                 if (!passwordCompare) {
                     return "Wrong password"
@@ -119,34 +119,33 @@ class UserServices {
                         username: userCheck.username,
                         role: userCheck.role,
                         avatar: userCheck.avatar,
-                        token : token,
-                        gmail:userCheck.gmail,
+                        token: token,
+                        gmail: userCheck.gmail,
                         birthday: userCheck.birthday,
-                        gender : userCheck.gender,
-                        ask : userCheck.ask,
-                        category : userCheck.category,
+                        gender: userCheck.gender,
+                        ask: userCheck.ask,
+                        category: userCheck.category,
                         status: userCheck.status
                     }
                     return userRes;
                 }
             }
-            }
+        }
 
 
     }
 
 
-    offline1 = async (id)=>{
-        let checkUser = await this.userRepository.findOneBy({idUser :id})
-        if(!checkUser) {
+    offline1 = async (id) => {
+        let checkUser = await this.userRepository.findOneBy({idUser: id})
+        if (!checkUser) {
             return null
-        }
-        else {
-            if(checkUser.status === 'active'){
+        } else {
+            if (checkUser.status === 'active') {
                 checkUser.status = 'off'
                 await this.userRepository.save(checkUser)
 
-            }else {
+            } else {
                 checkUser.status = 'active'
                 await this.userRepository.save(checkUser)
 
@@ -156,26 +155,20 @@ class UserServices {
     }
 
 
-
-
-
-    changeStatus = async (id)=>{
-        let checkUser = await this.userRepository.findOneBy({idUser :id})
-        if(!checkUser) {
-                    return null
-                 }
-        else {
-            if(checkUser.status === 'active'){
+    changeStatus = async (id) => {
+        let checkUser = await this.userRepository.findOneBy({idUser: id})
+        if (!checkUser) {
+            return null
+        } else {
+            if (checkUser.status === 'active') {
                 checkUser.status = 'lock'
                 await this.userRepository.save(checkUser)
 
-            }
-            else if (checkUser.status === 'lock'){
+            } else if (checkUser.status === 'lock') {
                 checkUser.status = 'active'
                 await this.userRepository.save(checkUser)
 
-            }
-            else {
+            } else {
                 return 'account is offline'
             }
         }
@@ -183,30 +176,21 @@ class UserServices {
     }
 
 
-
-
-
-
-
-    changeCategory = async (id)=>{
-        let checkUser = await this.userRepository.findOneBy({idUser :id})
-        if(!checkUser) {
+    changeCategory = async (id) => {
+        let checkUser = await this.userRepository.findOneBy({idUser: id})
+        if (!checkUser) {
             return null
-        }
-        else {
-            if(checkUser.category === 'Wait'){
+        } else {
+            if (checkUser.category === 'Wait') {
                 checkUser.category = 'Add'
                 await this.userRepository.save(checkUser)
+
 
             }
 
         }
 
     }
-
-
-
-
 
 
     // edit = async (id, user) => {
@@ -244,14 +228,12 @@ class UserServices {
     }
 
 
-
-    userRequest = async (id)=>{
-        let checkUser = await this.userRepository.findOneBy({idUser :id})
-        if(!checkUser) {
+    userRequest = async (id) => {
+        let checkUser = await this.userRepository.findOneBy({idUser: id})
+        if (!checkUser) {
             return null
-        }
-        else {
-            if(checkUser.ask === 'No'){
+        } else {
+            if (checkUser.ask === 'No') {
                 checkUser.ask = 'Yes'
                 await this.userRepository.save(checkUser)
 
@@ -261,36 +243,26 @@ class UserServices {
     }
 
 
-
-    changeRole = async (id)=>{
+    changeRole = async (id) => {
         console.log(2222222222)
-        let checkUser = await this.userRepository.findOneBy({idUser :id})
-        if(!checkUser) {
+        let checkUser = await this.userRepository.findOneBy({idUser: id})
+        if (!checkUser) {
             return null
-        }
-        else {
+        } else {
             const d = new Date();
             let year = d.getFullYear();
 
-            console.log(year - checkUser.birthday.split('-')[0] )
-            if(checkUser.role === 'user' && year - checkUser.birthday.split('-')[0] > 18){
+            console.log(year - checkUser.birthday.split('-')[0])
+            if (checkUser.role === 'user' && year - checkUser.birthday.split('-')[0] > 18) {
                 checkUser.role = 'seller'
                 await this.userRepository.save(checkUser)
                 return " Bạn đã đăng ký thành công"
-            }
-            else {
+            } else {
                 return 'Bạn chưa đủ tuổi'
             }
         }
 
     }
-
-
-
-
-
-
-
 
 
 }
