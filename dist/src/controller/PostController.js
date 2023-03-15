@@ -42,6 +42,7 @@ class PostController {
                 let check = await this.postService.checkUser1(idUser, idPost);
                 if (check === true && (req["decoded"].role === 'seller')) {
                     let post = await this.postService.updatePost(idPost, req.body);
+                    console.log(11111111111, req.body);
                     res.status(200).json(post);
                 }
                 else {

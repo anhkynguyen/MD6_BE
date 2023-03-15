@@ -18,17 +18,15 @@ class UserServices {
 
     getAll1 = async () => {
         let sql = `select *
-                   from user
-                   where role = 'user'`
+                   from user where NOT user.role = 'admin'
+                   `
         let users = await this.userRepository.query(sql);
         return users;
     }
 
 
     getUserRequest = async () => {
-        let sql = `select *
-                   from user
-                   where category = 'Wait'`
+        let sql = `select * from user u where u.ask = 'Yes' and NOT  u.role = 'admin' and NOT u.role ='seller'`
         let users = await this.userRepository.query(sql);
         return users;
     }

@@ -1126,13 +1126,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexColNames>idPost</UnderlyingIndexColNames>
     </key>
     <column id="320" parent="307" name="idUser">
-<<<<<<< HEAD
       <AutoIncrement>1</AutoIncrement>
       <DataType>INT(10)|4s</DataType>
-=======
-      <AutoIncrement>6</AutoIncrement>
-      <DataType>int|0s</DataType>
->>>>>>> origin/feature/post
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
