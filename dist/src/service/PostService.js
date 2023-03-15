@@ -4,7 +4,7 @@ const data_source_1 = require("../data-source");
 const post_1 = require("../model/post");
 class PostService {
     constructor() {
-        this.getAll2 = async () => {
+        this.getAll1 = async () => {
             let sql = `select * from post p join user u on p.idUser = u.idUser`;
             let posts = await this.postRepository.query(sql);
             console.log(posts);

@@ -7,6 +7,7 @@ export const postRouter = Router();
 postRouter.use(auth)
 
 postRouter.get('', PostController.getAllPosts)
+postRouter.get('/:id', PostController.findByIdPost)
 postRouter.post('/add', PostController.createPost)
 postRouter.delete('/remove/:idPost', PostController.removePost)
 postRouter.put('/edit/:idPost', PostController.editPost)
