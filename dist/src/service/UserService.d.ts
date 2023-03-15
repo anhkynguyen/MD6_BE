@@ -18,8 +18,11 @@ declare class UserServices {
         gmail: any;
         birthday: any;
         gender: any;
+<<<<<<< HEAD
         ask: any;
         category: any;
+=======
+>>>>>>> origin/feature/post
         status: any;
     }>;
     offline1: (id: any) => Promise<any>;

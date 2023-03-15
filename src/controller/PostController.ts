@@ -2,6 +2,7 @@
 import {Request, Response} from "express";
 
 import PostService from "../service/PostService";
+import postService from "../service/PostService";
 
 
 
@@ -18,7 +19,7 @@ class PostController {
         try {
             let data;
             let orders;
-            let posts = await this.postService.getAll1();
+            let posts = await this.postService.getAll2();
 
             if (req["decoded"]) {
 
@@ -116,15 +117,16 @@ class PostController {
 
 
 
-    // findByIdSong = async (req: Request, res: Response) => {
-    //     try {
-    //         let idSong = req.params.idSong
-    //         let songs = await songService.findById(idSong);
-    //         res.status(200).json(songs)
-    //     } catch (e) {
-    //         res.status(500).json(e.message)
-    //     }
-    // }
+    findByIdPost = async (req: Request, res: Response) => {
+        try {
+            console.log(req.params.id)
+            let idPost = req.params.id
+            let post = await postService.findById(idPost)
+            res.status(200).json(post)
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
     // findCategory = async (req: Request, res: Response) => {
     //     try {
     //         let categories= await categoryService.getAllCategory();

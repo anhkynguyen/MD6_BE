@@ -56,6 +56,7 @@ class UserServices {
             return users;
         };
         this.getMyProfile = async (idUser) => {
+            console.log(7777777777, idUser);
             let users = await this.userRepository.findOneBy({ idUser: idUser });
             return users;
         };
@@ -139,8 +140,11 @@ class UserServices {
                             gmail: userCheck.gmail,
                             birthday: userCheck.birthday,
                             gender: userCheck.gender,
+<<<<<<< HEAD
                             ask: userCheck.ask,
                             category: userCheck.category,
+=======
+>>>>>>> origin/feature/post
                             status: userCheck.status
                         };
                         return userRes;
