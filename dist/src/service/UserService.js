@@ -17,7 +17,12 @@ class UserServices {
             return users;
         };
         this.getUserRequest = async () => {
-            let sql = `select * from user where ask = 'Yes'`;
+            let sql = `select * from user where category = 'Wait'`;
+            let users = await this.userRepository.query(sql);
+            return users;
+        };
+        this.getWaitUser = async () => {
+            let sql = `select * from user where category = 'Wait'`;
             let users = await this.userRepository.query(sql);
             return users;
         };
@@ -79,7 +84,7 @@ class UserServices {
                 return "User not found";
             }
             else {
-                if (userCheck.status === 'lock') {
+                if (userCheck.status === 'lock' || userCheck.category === 'Wait') {
                     return "your account has been locked";
                 }
                 else {
@@ -140,6 +145,18 @@ class UserServices {
                 }
                 else {
                     return 'account is offline';
+                }
+            }
+        };
+        this.changeCategory = async (id) => {
+            let checkUser = await this.userRepository.findOneBy({ idUser: id });
+            if (!checkUser) {
+                return null;
+            }
+            else {
+                if (checkUser.category === 'Wait') {
+                    checkUser.category = 'Add';
+                    await this.userRepository.save(checkUser);
                 }
             }
         };

@@ -9,4 +9,5 @@ export declare class User {
     birthday: string;
     gender: string;
     ask: string;
+    category: string;
 }

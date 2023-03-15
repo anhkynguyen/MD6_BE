@@ -57,6 +57,18 @@ class AdminController {
     }
 
 
+
+    getAddUser = async (req: Request, res: Response) => {
+        try {
+            let response = await this.userServices.getWaitUser();
+            return res.status(200).json(response)
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
+
+
+
     changeRoleUser = async (req, res) => {
         console.log(11111111111111111)
         try {
@@ -69,6 +81,25 @@ class AdminController {
         }
 
     }
+
+
+
+
+    changeCategoryUser = async (req, res) => {
+
+        try {
+            let id = req.params.id
+            let response = await this.userServices.changeCategory(id)
+            return res.status(200).json(response)
+
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+
+    }
+
+
+
 
 
 

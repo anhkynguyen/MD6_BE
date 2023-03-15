@@ -22,4 +22,6 @@ export class User {
     gender: string;
     @Column({ default: "No" })
     ask: string;
+    @Column({ default: "Wait" })
+    category: string;
 }
