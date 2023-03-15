@@ -124,7 +124,8 @@ class UserServices {
                         birthday: userCheck.birthday,
                         gender : userCheck.gender,
                         ask : userCheck.ask,
-                        category : userCheck.category
+                        category : userCheck.category,
+                        status: userCheck.status
                     }
                     return userRes;
                 }
