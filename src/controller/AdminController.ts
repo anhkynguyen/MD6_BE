@@ -45,6 +45,38 @@ class AdminController {
     }
 
 
+
+
+    getAskUser = async (req: Request, res: Response) => {
+        try {
+            let response = await this.userServices.getUserRequest();
+            return res.status(200).json(response)
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
+
+
+    changeRoleUser = async (req, res) => {
+        console.log(11111111111111111)
+        try {
+            let id = req.params.id
+            let response = await this.userServices.changeRole(id)
+            return res.status(200).json(response)
+
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+
+    }
+
+
+
+
+
+
+
+
 }
 
 

@@ -10,4 +10,6 @@ exports.userRouter = (0, express_1.Router)();
 exports.userRouter.post('/register', UserController_1.default.register);
 exports.userRouter.post('/login', UserController_1.default.login);
 exports.userRouter.get('/off/:id', UserController_1.default.checkOff);
+exports.userRouter.get('/showMyProfile/:id', UserController_1.default.showMyProfile);
+exports.userRouter.get('/userRequest/:id', UserController_1.default.checkRequest);
 //# sourceMappingURL=user-router.js.map

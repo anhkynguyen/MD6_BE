@@ -30,6 +30,15 @@ const UserService_1 = __importDefault(require("../service/UserService"));
 const nodemailer = __importStar(require("nodemailer"));
 class UserController {
     constructor() {
+        this.showMyProfile = async (req, res) => {
+            try {
+                let response = await this.userServices.getMyProfile(req.params.idUser);
+                return res.status(200).json(response);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
         this.checkOldPassword = async (req, res) => {
             try {
                 let response = await this.userServices.checkOldPassword(req.params.idUser, req.body.password);
@@ -119,6 +128,16 @@ class UserController {
             try {
                 let id = req.params.id;
                 let response = await this.userServices.offline1(id);
+                return res.status(200).json(response);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.checkRequest = async (req, res) => {
+            try {
+                let id = req.params.id;
+                let response = await this.userServices.userRequest(id);
                 return res.status(200).json(response);
             }
             catch (e) {
