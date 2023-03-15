@@ -140,11 +140,8 @@ class UserServices {
                             gmail: userCheck.gmail,
                             birthday: userCheck.birthday,
                             gender: userCheck.gender,
-<<<<<<< HEAD
                             ask: userCheck.ask,
                             category: userCheck.category,
-=======
->>>>>>> origin/feature/post
                             status: userCheck.status
                         };
                         return userRes;

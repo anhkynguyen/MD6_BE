@@ -127,12 +127,6 @@ class UserServices {
                         gender: userCheck.gender,
                         ask: userCheck.ask,
                         category: userCheck.category,
-
-                        token : token,
-                        gmail:userCheck.gmail,
-                        birthday: userCheck.birthday,
-                        gender : userCheck.gender,
-
                         status: userCheck.status
                     }
                     return userRes;
