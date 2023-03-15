@@ -15,4 +15,6 @@ exports.adminRouter.get('/lock/:id', AdminController_1.default.lockUser);
 exports.adminRouter.delete('/:id', AdminController_1.default.remove);
 exports.adminRouter.get('/checkAsk', AdminController_1.default.getAskUser);
 exports.adminRouter.get('/changeRole/:id', AdminController_1.default.changeRoleUser);
+exports.adminRouter.get('/AddUser', AdminController_1.default.getAddUser);
+exports.adminRouter.get('/changeCategory/:id', AdminController_1.default.changeCategoryUser);
 //# sourceMappingURL=admin-router.js.map

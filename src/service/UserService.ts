@@ -23,7 +23,17 @@ class UserServices {
 
 
     getUserRequest = async () => {
-        let sql = `select * from user where ask = 'Yes'`
+        let sql = `select * from user where category = 'Wait'`
+        let users = await this.userRepository.query(sql);
+        return users;
+    }
+
+
+
+
+
+    getWaitUser = async () => {
+        let sql = `select * from user where category = 'Wait'`
         let users = await this.userRepository.query(sql);
         return users;
     }
@@ -88,7 +98,7 @@ class UserServices {
         if (!userCheck) {
             return "User not found";
         } else {
-            if (userCheck.status === 'lock') {
+            if (userCheck.status === 'lock' || userCheck.category === 'Wait') {
                 return "your account has been locked";
             }
             else {
@@ -165,6 +175,32 @@ class UserServices {
         }
 
     }
+
+
+
+
+
+
+
+    changeCategory = async (id)=>{
+        let checkUser = await this.userRepository.findOneBy({idUser :id})
+        if(!checkUser) {
+            return null
+        }
+        else {
+            if(checkUser.category === 'Wait'){
+                checkUser.category = 'Add'
+                await this.userRepository.save(checkUser)
+
+            }
+
+        }
+
+    }
+
+
+
+
 
 
     // edit = async (id, user) => {
