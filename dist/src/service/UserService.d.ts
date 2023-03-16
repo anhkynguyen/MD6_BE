@@ -26,8 +26,8 @@ declare class UserServices {
     changeStatus: (id: any) => Promise<string>;
     changeCategory: (id: any) => Promise<any>;
     removeUser1: (id: any) => Promise<any>;
-    userRequest: (id: any) => Promise<any>;
-    changeRole: (id: any) => Promise<" Bạn đã đăng ký thành công" | "Bạn chưa đủ tuổi">;
+    userRequest: (id: any) => Promise<string>;
+    changeRole: (id: any) => Promise<"Bạn chưa đủ tuổi" | " Bạn đã đăng ký thành công">;
 }
 declare const _default: UserServices;
 export default _default;

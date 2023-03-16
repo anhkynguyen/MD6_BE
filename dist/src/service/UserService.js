@@ -224,14 +224,21 @@ class UserServices {
             return this.userRepository.delete({ idUser: id });
         };
         this.userRequest = async (id) => {
+            const d = new Date();
+            let year = d.getFullYear();
             let checkUser = await this.userRepository.findOneBy({ idUser: id });
             if (!checkUser) {
                 return null;
             }
             else {
-                if (checkUser.ask === 'No') {
-                    checkUser.ask = 'Yes';
-                    await this.userRepository.save(checkUser);
+                if (year - checkUser.birthday.split('-')[0] > 18) {
+                    if (checkUser.ask === 'No') {
+                        checkUser.ask = 'Yes';
+                        await this.userRepository.save(checkUser);
+                    }
+                }
+                else {
+                    return 'Bạn chưa đủ tuổi';
                 }
             }
         };
