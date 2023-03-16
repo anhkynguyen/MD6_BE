@@ -42,10 +42,17 @@ class UserServices {
 
 
     getMyProfile = async (idUser) => {
-        console.log(7777777777,idUser)
+
         let users = await this.userRepository.findOneBy({idUser: idUser});
         return users;
     }
+
+
+
+
+
+
+
 
     checkOldPassword = async (idUser, password) => {
         let userCheck = await this.userRepository.findOneBy({idUser: idUser});

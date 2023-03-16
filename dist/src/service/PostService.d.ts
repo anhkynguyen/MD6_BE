@@ -1,5 +1,6 @@
 declare class PostService {
     private postRepository;
+    private userRepository;
     constructor();
     getAll2: () => Promise<any>;
     findById: (id: any) => Promise<any>;
@@ -8,6 +9,7 @@ declare class PostService {
     updatePost: (idPost: any, newPost: any) => Promise<any>;
     removePost1: (idPost: any) => Promise<any>;
     checkUser1: (idUser: any, idPost: any) => Promise<boolean>;
+    checkSeller: (idPost: any) => Promise<any>;
 }
 declare const _default: PostService;
 export default _default;

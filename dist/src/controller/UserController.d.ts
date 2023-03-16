@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 declare class UserController {
     private userServices;
+    private postServices;
     constructor();
     showMyProfile: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
+    showSellerProfile: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     checkOldPassword: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     checkNewPassword: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     changePassword: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;

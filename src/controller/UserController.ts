@@ -1,13 +1,16 @@
 import {Request, Response} from "express";
 import UserService from "../service/UserService";
+import PostService from "../service/PostService";
 
 
 class UserController {
     private userServices;
+    private postServices;
 
 
     constructor() {
         this.userServices = UserService;
+        this.postServices = PostService;
 
     }
 
@@ -15,13 +18,39 @@ class UserController {
     showMyProfile = async (req: Request, res: Response) => {
         try {
             let id = req.params
-            console.log(6666666666666,id.id)
+
             let response = await this.userServices.getMyProfile(id.id);
             return res.status(200).json(response)
         } catch (e) {
             res.status(500).json(e.message)
         }
     }
+
+
+
+
+
+    showSellerProfile = async (req: Request, res: Response) => {
+        try {
+            let id = req.params
+            console.log(333333333333333,id)
+
+            let response = await this.postServices.checkSeller(id.id);
+            return res.status(200).json(response)
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     checkOldPassword = async (req: Request, res: Response) => {
         try {

@@ -1,13 +1,18 @@
 import {Request, Response} from "express";
 import {AppDataSource} from "../data-source";
 import {Post} from "../model/post";
+import {User} from "../model/user";
+
 
 
 class PostService {
     private postRepository
+    private userRepository
+
 
     constructor() {
         this.postRepository = AppDataSource.getRepository(Post);
+        this.userRepository = AppDataSource.getRepository(User);
 
     }
 
@@ -107,6 +112,19 @@ class PostService {
         return false;
     }
 
+
+    checkSeller = async ( idPost) => {
+        let sql = `select u.idUser
+                   from user u
+                            join post p on p.idUser = u.idUser
+
+                   where p.idPost = ${idPost}`;
+      let idUser =  await this.postRepository.query(sql);
+        console.log(111111111111,idUser[0].idUser)
+        let users = await this.userRepository.findOneBy({idUser: idUser[0].idUser});
+        console.log(2222222222222, users)
+        return users
+    }
 
 
 

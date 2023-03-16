@@ -54,7 +54,6 @@ class UserServices {
             return users;
         };
         this.getMyProfile = async (idUser) => {
-            console.log(7777777777, idUser);
             let users = await this.userRepository.findOneBy({ idUser: idUser });
             return users;
         };
