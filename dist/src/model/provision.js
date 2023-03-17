@@ -9,52 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Post = void 0;
+exports.Provision = void 0;
 const typeorm_1 = require("typeorm");
-let Post = class Post {
+let Provision = class Provision {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Post.prototype, "idPost", void 0);
+], Provision.prototype, "idProvision", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Post.prototype, "namePost", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'text' }),
-    __metadata("design:type", String)
-], Post.prototype, "image", void 0);
-__decorate([
-    (0, typeorm_1.Column)({
-        nullable: false,
-        default: () => 'DATE_ADD(NOW())',
-        type: 'timestamp',
-    }),
-    __metadata("design:type", Date)
-], Post.prototype, "date", void 0);
+], Provision.prototype, "provisionName", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Post.prototype, "description", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Post.prototype, "idUser", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Post.prototype, "height", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Post.prototype, "weight", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Post.prototype, "measurement", void 0);
-Post = __decorate([
+], Provision.prototype, "price", void 0);
+Provision = __decorate([
     (0, typeorm_1.Entity)()
-], Post);
-exports.Post = Post;
-//# sourceMappingURL=post.js.map
+], Provision);
+exports.Provision = Provision;
+//# sourceMappingURL=provision.js.map

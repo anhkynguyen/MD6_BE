@@ -5,6 +5,7 @@ require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const user_1 = require("./model/user");
 const post_1 = require("./model/post");
+const provision_1 = require("./model/provision");
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "mysql",
     host: "127.0.0.1",
@@ -14,6 +15,6 @@ exports.AppDataSource = new typeorm_1.DataSource({
     database: "love",
     synchronize: true,
     logging: false,
-    entities: [user_1.User, post_1.Post]
+    entities: [user_1.User, post_1.Post, provision_1.Provision]
 });
 //# sourceMappingURL=data-source.js.map
