@@ -54,7 +54,7 @@ class UserServices {
 
 
 
-    checkOldPassword = async (idUser, password) => {
+    checkOldPassword1 = async (idUser, password) => {
         let userCheck = await this.userRepository.findOneBy({idUser: idUser});
         if (!userCheck) {
             return "User not found";
@@ -68,21 +68,10 @@ class UserServices {
         }
     }
 
-    checkNewPassword = async (idUser, password) => {
-        let userCheck = await this.userRepository.findOneBy({idUser: idUser});
-        if (!userCheck) {
-            return "User not found";
-        } else {
-            let passwordCompare = await bcrypt.compare(password, userCheck.password);
-            if (passwordCompare) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+
 
     changePassword = async (idUser, password) => {
+
         let user = await this.userRepository.findOneBy({idUser: idUser});
         if (!user) {
             return "User not found";
@@ -193,7 +182,6 @@ class UserServices {
                 await this.userRepository.save(checkUser)
 
                 let email = checkUser.gmail
-                console.log(111111111111,email)
                 let transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
@@ -286,7 +274,7 @@ class UserServices {
 
 
     changeRole = async (id) => {
-        console.log(2222222222)
+
         let checkUser = await this.userRepository.findOneBy({idUser: id})
         if (!checkUser) {
             return null

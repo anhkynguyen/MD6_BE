@@ -12,4 +12,5 @@ userRouter.get('/off/:id', UserController.checkOff)
 userRouter.get('/showMyProfile/:id', UserController.showMyProfile)
 userRouter.get('/userRequest/:id', UserController.checkRequest)
 userRouter.get('/showSellerProfile/:id', UserController.showSellerProfile)
+userRouter.put('/changePassword/:id', UserController.changePassword1)
 

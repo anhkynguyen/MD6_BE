@@ -26,8 +26,6 @@ class PostController {
         this.createPost = async (req, res) => {
             try {
                 let posts = await this.postService.save(req.body);
-                let a = posts.date.getTime();
-                console.log(8888888888888888, a);
                 res.status(200).json(posts);
             }
             catch (e) {

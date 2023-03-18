@@ -27,13 +27,9 @@ class UserController {
     }
 
 
-
-
-
     showSellerProfile = async (req: Request, res: Response) => {
         try {
             let id = req.params
-            console.log(333333333333333,id)
 
             let response = await this.postServices.checkSeller(id.id);
             return res.status(200).json(response)
@@ -43,51 +39,19 @@ class UserController {
     }
 
 
+    changePassword1 = async (req: Request, res: Response) => {
 
-
-
-
-
-
-
-
-
-    checkOldPassword = async (req: Request, res: Response) => {
         try {
-            let response = await this.userServices.checkOldPassword(req.params.idUser, req.body.password);
-            return res.status(200).json(response);
-        } catch (e) {
-            res.status(500).json(e.message)
-        }
-    }
-
-    checkNewPassword = async (req: Request, res: Response) => {
-        try {
-            let response = await this.userServices.checkNewPassword(req.params.idUser, req.body.password);
-            return res.status(200).json(response);
-        } catch (e) {
-            res.status(500).json(e.message)
-        }
-    }
-
-    changePassword = async (req: Request, res: Response) => {
-        try {
-            let checkOldPassword = await this.userServices.checkOldPassword(req.params.idUser, req.body.oldPassword)
-            let checkNewPassword = await this.userServices.checkNewPassword(req.params.idUser, req.body.newPassword)
+            let checkOldPassword = await this.userServices.checkOldPassword1(req.params.id, req.body.oldPassword)
             if (checkOldPassword === "User not found") {
                 return res.status(200).json("User not found");
-            } else if (!checkOldPassword) {
-                return res.status(200).json("Old password does not match");
+            } else if (checkOldPassword === false) {
+                return res.status(200).json("Old password not true");
             } else {
-                if (checkNewPassword === "User not found") {
-                    return res.status(200).json("User not found");
-                } else if (checkNewPassword) {
-                    return res.status(200).json("New password is match with old password");
-                } else {
-                    await this.userServices.changePassword(req.params.idUser, req.body.newPassword)
-                    return res.status(200).json("Success")
-                }
+                await this.userServices.changePassword(req.params.id, req.body.newPassword)
+                return res.status(200).json("Success")
             }
+
         } catch (e) {
             res.status(500).json(e.message)
         }

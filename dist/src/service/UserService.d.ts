@@ -5,8 +5,7 @@ declare class UserServices {
     getUserRequest: () => Promise<any>;
     getWaitUser: () => Promise<any>;
     getMyProfile: (idUser: any) => Promise<any>;
-    checkOldPassword: (idUser: any, password: any) => Promise<boolean | "User not found">;
-    checkNewPassword: (idUser: any, password: any) => Promise<boolean | "User not found">;
+    checkOldPassword1: (idUser: any, password: any) => Promise<boolean | "User not found">;
     changePassword: (idUser: any, password: any) => Promise<any>;
     register1: (user: any) => Promise<any>;
     checkUser: (user: any) => Promise<"User not found" | "your account has been locked" | "Wrong password" | {
