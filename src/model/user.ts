@@ -24,4 +24,5 @@ export class User {
     ask: string;
     @Column({ default: "Wait" })
     category: string;
+
 }

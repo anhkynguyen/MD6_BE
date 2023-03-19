@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import { AppDataSource } from "./src/data-source";
 import cors from "cors";
 
+
+
 const app = express();
 
 AppDataSource.initialize().then(() => {console.log('database connected');
@@ -17,3 +19,7 @@ app.use('', router);
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 })
+
+
+
+

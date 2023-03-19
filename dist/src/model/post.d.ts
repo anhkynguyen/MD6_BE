@@ -5,7 +5,6 @@ export declare class Post {
     date: Date;
     description: string;
     idUser: number;
-    price: number;
     height: number;
     weight: number;
     measurement: string;

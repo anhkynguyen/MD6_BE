@@ -13,5 +13,8 @@ exports.userRouter.get('/off/:id', UserController_1.default.checkOff);
 exports.userRouter.get('/showMyProfile/:id', UserController_1.default.showMyProfile);
 exports.userRouter.get('/userRequest/:id', UserController_1.default.checkRequest);
 exports.userRouter.get('/showSellerProfile/:id', UserController_1.default.showSellerProfile);
-exports.userRouter.put('/change-password/:id', UserController_1.default.changePassword);
+exports.userRouter.put('/changePassword/:id', UserController_1.default.changePassword1);
+exports.userRouter.get('/findByName/:name', UserController_1.default.findByName);
+exports.userRouter.get('/findByGender/:gender', UserController_1.default.findByGender);
+exports.userRouter.get('/findByBirthday', UserController_1.default.findByBirthday);
 //# sourceMappingURL=user-router.js.map

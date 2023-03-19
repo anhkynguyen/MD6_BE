@@ -2,6 +2,7 @@
 import {Request, Response} from "express";
 
 import PostService from "../service/PostService";
+import postService from "../service/PostService";
 
 
 
@@ -14,21 +15,11 @@ class PostController {
 
     }
 
-    findByIdPost = async (req: Request, res: Response) => {
-        try {
-            let idPost = req.params.id
-            let post = await this.postService.findById(idPost)
-            res.status(200).json(post)
-        } catch (e) {
-            res.status(500).json(e.message)
-        }
-    }
-
     getAllPosts = async (req: Request, res: Response) => {
         try {
             let data;
             let orders;
-            let posts = await this.postService.getAll1();
+            let posts = await this.postService.getAll2();
 
             if (req["decoded"]) {
 
@@ -47,9 +38,9 @@ class PostController {
     createPost = async (req: Request, res: Response) => {
         try {
             let posts = await this.postService.save(req.body);
-            let a = posts.date.getTime();
             res.status(200).json(posts)
         } catch (e) {
+            console.log(e)
             res.status(500).json(e.message)
         }
 
@@ -64,6 +55,8 @@ class PostController {
             let check = await this.postService.checkUser1(idUser, idPost);
             if (check === true && (req["decoded"].role === 'seller')) {
                 let post = await this.postService.updatePost(idPost, req.body);
+
+                console.log(11111111111,req.body)
                 res.status(200).json(post);
             }
             else {
@@ -121,15 +114,16 @@ class PostController {
 
 
 
-    // findByIdSong = async (req: Request, res: Response) => {
-    //     try {
-    //         let idSong = req.params.idSong
-    //         let songs = await songService.findById(idSong);
-    //         res.status(200).json(songs)
-    //     } catch (e) {
-    //         res.status(500).json(e.message)
-    //     }
-    // }
+    findByIdPost = async (req: Request, res: Response) => {
+        try {
+            console.log(req.params.id)
+            let idPost = req.params.id
+            let post = await postService.findById(idPost)
+            res.status(200).json(post)
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
     // findCategory = async (req: Request, res: Response) => {
     //     try {
     //         let categories= await categoryService.getAllCategory();

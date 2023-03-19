@@ -12,6 +12,8 @@ userRouter.get('/off/:id', UserController.checkOff)
 userRouter.get('/showMyProfile/:id', UserController.showMyProfile)
 userRouter.get('/userRequest/:id', UserController.checkRequest)
 userRouter.get('/showSellerProfile/:id', UserController.showSellerProfile)
-userRouter.put('/change-password/:id', UserController.changePassword)
-
+userRouter.put('/changePassword/:id', UserController.changePassword1)
+userRouter.get('/findByName/:name', UserController.findByName) // tag 14 tìm kiếm theo username hoặc namePost
+userRouter.get('/findByGender/:gender', UserController.findByGender) // tag 14 tìm kiếm theo giới tính
+userRouter.get('/findByBirthday', UserController.findByBirthday) // tag 14 tìm kiếm theo độ tuổi
 

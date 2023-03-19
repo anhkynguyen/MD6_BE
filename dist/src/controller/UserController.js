@@ -27,45 +27,28 @@ class UserController {
                 res.status(500).json(e.message);
             }
         };
-        this.checkOldPassword = async (req, res) => {
+        this.showSellerProfile = async (req, res) => {
             try {
-                let response = await this.userServices.checkOldPassword(req.params.idUser, req.body.password);
+                let id = req.params;
+                let response = await this.postServices.checkSeller(id.id);
                 return res.status(200).json(response);
             }
             catch (e) {
                 res.status(500).json(e.message);
             }
         };
-        this.checkNewPassword = async (req, res) => {
+        this.changePassword1 = async (req, res) => {
             try {
-                let response = await this.userServices.checkNewPassword(req.params.idUser, req.body.password);
-                return res.status(200).json(response);
-            }
-            catch (e) {
-                res.status(500).json(e.message);
-            }
-        };
-        this.changePassword = async (req, res) => {
-            try {
-                let checkOldPassword = await this.userServices.checkOldPassword(req.params.idUser, req.body.oldPassword);
-                let checkNewPassword = await this.userServices.checkNewPassword(req.params.idUser, req.body.newPassword);
+                let checkOldPassword = await this.userServices.checkOldPassword1(req.params.id, req.body.oldPassword);
                 if (checkOldPassword === "User not found") {
                     return res.status(200).json("User not found");
                 }
-                else if (!checkOldPassword) {
-                    return res.status(200).json("Old password does not match");
+                else if (checkOldPassword === false) {
+                    return res.status(200).json("Old password not true");
                 }
                 else {
-                    if (checkNewPassword === "User not found") {
-                        return res.status(200).json("User not found");
-                    }
-                    else if (checkNewPassword) {
-                        return res.status(200).json("New password is match with old password");
-                    }
-                    else {
-                        await this.userServices.changePassword(req.params.idUser, req.body.newPassword);
-                        return res.status(200).json("Success");
-                    }
+                    await this.userServices.changePassword(req.params.id, req.body.newPassword);
+                    return res.status(200).json("Success");
                 }
             }
             catch (e) {
@@ -105,6 +88,37 @@ class UserController {
             try {
                 let id = req.params.id;
                 let response = await this.userServices.userRequest(id);
+                return res.status(200).json(response);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.findByName = async (req, res) => {
+            try {
+                let name = req.params.name;
+                let response = await this.userServices.findByNameService(name);
+                return res.status(200).json(response);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.findByGender = async (req, res) => {
+            try {
+                let gender = req.params.gender;
+                let response = await this.userServices.findByGenderService(gender);
+                return res.status(200).json(response);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.findByBirthday = async (req, res) => {
+            try {
+                let yearOne = req.body.yearOne;
+                let yearSecond = req.body.yearSecond;
+                let response = await this.userServices.findByBirthdayService(yearOne, yearSecond);
                 return res.status(200).json(response);
             }
             catch (e) {

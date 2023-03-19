@@ -44,10 +44,6 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Post.prototype, "price", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
 ], Post.prototype, "height", void 0);
 __decorate([
     (0, typeorm_1.Column)(),

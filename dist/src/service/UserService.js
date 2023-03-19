@@ -57,22 +57,7 @@ class UserServices {
             let users = await this.userRepository.findOneBy({ idUser: idUser });
             return users;
         };
-        this.checkOldPassword = async (idUser, password) => {
-            let userCheck = await this.userRepository.findOneBy({ idUser: idUser });
-            if (!userCheck) {
-                return "User not found";
-            }
-            else {
-                let passwordCompare = await bcrypt_1.default.compare(password, userCheck.password);
-                if (passwordCompare) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-        };
-        this.checkNewPassword = async (idUser, password) => {
+        this.checkOldPassword1 = async (idUser, password) => {
             let userCheck = await this.userRepository.findOneBy({ idUser: idUser });
             if (!userCheck) {
                 return "User not found";
@@ -222,14 +207,21 @@ class UserServices {
             return this.userRepository.delete({ idUser: id });
         };
         this.userRequest = async (id) => {
+            const d = new Date();
+            let year = d.getFullYear();
             let checkUser = await this.userRepository.findOneBy({ idUser: id });
             if (!checkUser) {
                 return null;
             }
             else {
-                if (checkUser.ask === 'No') {
-                    checkUser.ask = 'Yes';
-                    await this.userRepository.save(checkUser);
+                if (year - checkUser.birthday.split('-')[0] > 18) {
+                    if (checkUser.ask === 'No') {
+                        checkUser.ask = 'Yes';
+                        await this.userRepository.save(checkUser);
+                    }
+                }
+                else {
+                    return 'Bạn chưa đủ tuổi';
                 }
             }
         };
@@ -251,6 +243,31 @@ class UserServices {
                     return 'Bạn chưa đủ tuổi';
                 }
             }
+        };
+        this.findByNameService = async (name) => {
+            let sql = `select * from user u
+                                     join post p on u.idUser = p.idUser
+                   where u.username  like '%${name}%' or p.namePost like '%${name}%'
+                   `;
+            let seller = await this.userRepository.query(sql);
+            return seller;
+        };
+        this.findByGenderService = async (gender) => {
+            let sql = `select * from user u
+                   join post p on u.idUser = p.idUser
+                   where gender = '${gender}'
+                   `;
+            let seller = await this.userRepository.query(sql);
+            return seller;
+        };
+        this.findByBirthdayService = async (yearOne, yearSecond) => {
+            let sql = `SELECT * FROM user u
+                                     join post p on u.idUser = p.idUser
+                   where
+                       (YEAR(CURDATE()) - YEAR(birthday)) >= '${yearOne}' and (YEAR(CURDATE()) - YEAR(birthday)) < '${yearSecond}'
+                   `;
+            let seller = await this.userRepository.query(sql);
+            return seller;
         };
         this.userRepository = data_source_1.AppDataSource.getRepository(user_1.User);
     }

@@ -20,12 +20,11 @@ export class Post {
     @Column()
     idUser: number;
     @Column()
-    price: number;
-    @Column()
     height: number;
     @Column()
     weight: number;
     @Column()
    measurement : string;
+
 
 }

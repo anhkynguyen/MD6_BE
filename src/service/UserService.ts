@@ -42,11 +42,19 @@ class UserServices {
 
 
     getMyProfile = async (idUser) => {
+
         let users = await this.userRepository.findOneBy({idUser: idUser});
         return users;
     }
 
-    checkOldPassword = async (idUser, password) => {
+
+
+
+
+
+
+
+    checkOldPassword1 = async (idUser, password) => {
         let userCheck = await this.userRepository.findOneBy({idUser: idUser});
         if (!userCheck) {
             return "User not found";
@@ -60,21 +68,10 @@ class UserServices {
         }
     }
 
-    checkNewPassword = async (idUser, password) => {
-        let userCheck = await this.userRepository.findOneBy({idUser: idUser});
-        if (!userCheck) {
-            return "User not found";
-        } else {
-            let passwordCompare = await bcrypt.compare(password, userCheck.password);
-            if (passwordCompare) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+
 
     changePassword = async (idUser, password) => {
+
         let user = await this.userRepository.findOneBy({idUser: idUser});
         if (!user) {
             return "User not found";
@@ -94,7 +91,7 @@ class UserServices {
     }
 
     checkUser = async (user) => {
-        let userCheck = await this.userRepository.findOneBy({gmail: user.gmail});
+        let userCheck = await this.userRepository.findOneBy({username: user.username});
         if (!userCheck) {
             return "User not found";
         } else {
@@ -254,21 +251,30 @@ class UserServices {
 
 
     userRequest = async (id) => {
+        const d = new Date();
+        let year = d.getFullYear();
         let checkUser = await this.userRepository.findOneBy({idUser: id})
         if (!checkUser) {
             return null
         } else {
-            if (checkUser.ask === 'No') {
-                checkUser.ask = 'Yes'
-                await this.userRepository.save(checkUser)
+            if ( year - checkUser.birthday.split('-')[0] > 18){
+                if (checkUser.ask === 'No') {
+                    checkUser.ask = 'Yes'
+                    await this.userRepository.save(checkUser)
 
+                }
             }
+            else {
+                return 'Bạn chưa đủ tuổi'
+            }
+
         }
 
     }
 
 
     changeRole = async (id) => {
+
         let checkUser = await this.userRepository.findOneBy({idUser: id})
         if (!checkUser) {
             return null
@@ -286,6 +292,41 @@ class UserServices {
             }
         }
 
+    }
+
+
+    findByNameService = async (name)=>{
+        let sql = `select * from user u
+                                     join post p on u.idUser = p.idUser
+                   where u.username  like '%${name}%' or p.namePost like '%${name}%'
+                   `
+        let seller = await this.userRepository.query(sql);
+        return seller;
+    }
+
+
+
+
+    findByGenderService = async (gender)=>{
+        let sql = `select * from user u
+                   join post p on u.idUser = p.idUser
+                   where gender = '${gender}'
+                   `
+        let seller = await this.userRepository.query(sql);
+        return seller;
+    }
+
+
+
+
+    findByBirthdayService = async (yearOne,yearSecond)=>{
+        let sql = `SELECT * FROM user u
+                                     join post p on u.idUser = p.idUser
+                   where
+                       (YEAR(CURDATE()) - YEAR(birthday)) >= '${yearOne}' and (YEAR(CURDATE()) - YEAR(birthday)) < '${yearSecond}'
+                   `
+        let seller = await this.userRepository.query(sql);
+        return seller;
     }
 
 

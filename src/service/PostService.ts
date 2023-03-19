@@ -1,24 +1,25 @@
 import {Request, Response} from "express";
 import {AppDataSource} from "../data-source";
-
 import {Post} from "../model/post";
 import {User} from "../model/user";
+
 
 
 class PostService {
     private postRepository
     private userRepository
 
+
     constructor() {
         this.postRepository = AppDataSource.getRepository(Post);
         this.userRepository = AppDataSource.getRepository(User);
 
-
     }
 
-    getAll1 = async () => {
+    getAll2 = async () => {
         let sql = `select * from post p join user u on p.idUser = u.idUser`;
         let posts = await this.postRepository.query(sql);
+        console.log(posts)
         if (!posts) {
             return 'No posts found'
         }
@@ -31,16 +32,7 @@ class PostService {
         return post;
     }
 
-    checkSeller = async ( idPost) => {
-        let sql = `select u.idUser
-                   from user u
-                            join post p on p.idUser = u.idUser
 
-                   where p.idPost = ${idPost}`;
-        let idUser =  await this.postRepository.query(sql);
-        let users = await this.userRepository.findOneBy({idUser: idUser[0].idUser});
-        return users
-    }
 
     save = async (post) => {
         return this.postRepository.save(post);
@@ -55,6 +47,7 @@ class PostService {
 
 
     updatePost = async (idPost, newPost) => {
+
 
 
         let post = await this.postRepository.findOneBy({idPost: idPost})
@@ -119,6 +112,19 @@ class PostService {
         return false;
     }
 
+
+    checkSeller = async ( idPost) => {
+        let sql = `select u.idUser
+                   from user u
+                            join post p on p.idUser = u.idUser
+
+                   where p.idPost = ${idPost}`;
+      let idUser =  await this.postRepository.query(sql);
+        console.log(111111111111,idUser[0].idUser)
+        let users = await this.userRepository.findOneBy({idUser: idUser[0].idUser});
+        console.log(2222222222222, users)
+        return users
+    }
 
 
 
