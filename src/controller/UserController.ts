@@ -117,6 +117,56 @@ class UserController {
     }
 
 
+
+
+    findByName = async (req, res) => {
+        try {
+            let name = req.params.name
+            let response = await this.userServices.findByNameService(name)
+            return res.status(200).json(response)
+
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
+
+
+
+
+    findByGender = async (req, res) => {
+        try {
+            let gender = req.params.gender
+            let response = await this.userServices.findByGenderService(gender)
+            return res.status(200).json(response)
+
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
+
+
+
+
+    findByBirthday = async (req, res) => {
+        try {
+            let yearOne = req.body.yearOne
+            let yearSecond = req.body.yearSecond
+            let response = await this.userServices.findByBirthdayService(yearOne,yearSecond)
+            return res.status(200).json(response)
+
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
+
+
+
+
+
+
+
+
+
 }
 
 

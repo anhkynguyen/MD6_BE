@@ -75,6 +75,7 @@ class OrderController {
             let order = req.body
 
 
+
             order.total = order.time*70000
              order = await this.orderService.saveOrder(req.body);
 

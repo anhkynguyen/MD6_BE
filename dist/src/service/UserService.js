@@ -244,6 +244,31 @@ class UserServices {
                 }
             }
         };
+        this.findByNameService = async (name) => {
+            let sql = `select * from user u
+                                     join post p on u.idUser = p.idUser
+                   where u.username  like '%${name}%' or p.namePost like '%${name}%'
+                   `;
+            let seller = await this.userRepository.query(sql);
+            return seller;
+        };
+        this.findByGenderService = async (gender) => {
+            let sql = `select * from user u
+                   join post p on u.idUser = p.idUser
+                   where gender = '${gender}'
+                   `;
+            let seller = await this.userRepository.query(sql);
+            return seller;
+        };
+        this.findByBirthdayService = async (yearOne, yearSecond) => {
+            let sql = `SELECT * FROM user u
+                                     join post p on u.idUser = p.idUser
+                   where
+                       (YEAR(CURDATE()) - YEAR(birthday)) >= '${yearOne}' and (YEAR(CURDATE()) - YEAR(birthday)) < '${yearSecond}'
+                   `;
+            let seller = await this.userRepository.query(sql);
+            return seller;
+        };
         this.userRepository = data_source_1.AppDataSource.getRepository(user_1.User);
     }
 }

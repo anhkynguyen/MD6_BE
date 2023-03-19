@@ -27,6 +27,9 @@ declare class UserServices {
     removeUser1: (id: any) => Promise<any>;
     userRequest: (id: any) => Promise<string>;
     changeRole: (id: any) => Promise<"Bạn chưa đủ tuổi" | " Bạn đã đăng ký thành công">;
+    findByNameService: (name: any) => Promise<any>;
+    findByGenderService: (gender: any) => Promise<any>;
+    findByBirthdayService: (yearOne: any, yearSecond: any) => Promise<any>;
 }
 declare const _default: UserServices;
 export default _default;

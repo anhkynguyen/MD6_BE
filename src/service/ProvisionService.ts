@@ -19,16 +19,11 @@ class PostService {
     getAllProvisionService = async () => {
         let sql = `select * from provision`;
         let provisions = await  this.provisionRepository.query(sql);
-        // console.log(provisions)
         if (!provisions) {
             return 'No posts found'
         }
         return provisions;
     }
-
-
-
-
 
 }
 
