@@ -10,10 +10,9 @@ const PostController_1 = __importDefault(require("../controller/PostController")
 exports.postRouter = (0, express_1.Router)();
 exports.postRouter.use(auth_1.auth);
 exports.postRouter.get('', PostController_1.default.getAllPosts);
-exports.postRouter.get('/:id', PostController_1.default.findByIdPost);
 exports.postRouter.post('/add', PostController_1.default.createPost);
 exports.postRouter.delete('/remove/:idPost', PostController_1.default.removePost);
 exports.postRouter.put('/edit/:idPost', PostController_1.default.editPost);
 exports.postRouter.get('/showPosts', PostController_1.default.getLimitPost);
-exports.postRouter.get('/findById/:id', PostController_1.default.findByIdPost);
+exports.postRouter.get('/:id', PostController_1.default.findByIdPost);
 //# sourceMappingURL=post-router.js.map

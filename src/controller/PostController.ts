@@ -16,7 +16,6 @@ class PostController {
 
     findByIdPost = async (req: Request, res: Response) => {
         try {
-            console.log(req.params.id)
             let idPost = req.params.id
             let post = await this.postService.findById(idPost)
             res.status(200).json(post)
@@ -29,7 +28,7 @@ class PostController {
         try {
             let data;
             let orders;
-            let posts = await this.postService.getAll2();
+            let posts = await this.postService.getAll1();
 
             if (req["decoded"]) {
 
@@ -48,14 +47,9 @@ class PostController {
     createPost = async (req: Request, res: Response) => {
         try {
             let posts = await this.postService.save(req.body);
-
             let a = posts.date.getTime();
-            console.log(8888888888888888,a)
-
-
             res.status(200).json(posts)
         } catch (e) {
-            console.log(e)
             res.status(500).json(e.message)
         }
 

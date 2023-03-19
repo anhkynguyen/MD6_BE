@@ -66,7 +66,6 @@ class AdminController {
 
 
     changeRoleUser = async (req, res) => {
-        console.log(11111111111111111)
         try {
             let id = req.params.id
             let response = await this.userServices.changeRole(id)

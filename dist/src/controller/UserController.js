@@ -4,12 +4,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const UserService_1 = __importDefault(require("../service/UserService"));
+const PostService_1 = __importDefault(require("../service/PostService"));
 class UserController {
     constructor() {
+        this.showSellerProfile = async (req, res) => {
+            try {
+                let id = req.params;
+                let response = await this.postServices.checkSeller(id.id);
+                return res.status(200).json(response);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
         this.showMyProfile = async (req, res) => {
             try {
                 let id = req.params;
-                console.log(6666666666666, id.id);
                 let response = await this.userServices.getMyProfile(id.id);
                 return res.status(200).json(response);
             }
@@ -59,6 +69,7 @@ class UserController {
                 }
             }
             catch (e) {
+                console.log(e);
                 res.status(500).json(e.message);
             }
         };
@@ -101,6 +112,7 @@ class UserController {
             }
         };
         this.userServices = UserService_1.default;
+        this.postServices = PostService_1.default;
     }
 }
 exports.default = new UserController();

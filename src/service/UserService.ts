@@ -42,7 +42,6 @@ class UserServices {
 
 
     getMyProfile = async (idUser) => {
-        console.log(7777777777,idUser)
         let users = await this.userRepository.findOneBy({idUser: idUser});
         return users;
     }
@@ -95,7 +94,7 @@ class UserServices {
     }
 
     checkUser = async (user) => {
-        let userCheck = await this.userRepository.findOneBy({username: user.username});
+        let userCheck = await this.userRepository.findOneBy({gmail: user.gmail});
         if (!userCheck) {
             return "User not found";
         } else {
@@ -186,7 +185,6 @@ class UserServices {
                 await this.userRepository.save(checkUser)
 
                 let email = checkUser.gmail
-                console.log(111111111111,email)
                 let transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
@@ -271,7 +269,6 @@ class UserServices {
 
 
     changeRole = async (id) => {
-        console.log(2222222222)
         let checkUser = await this.userRepository.findOneBy({idUser: id})
         if (!checkUser) {
             return null
