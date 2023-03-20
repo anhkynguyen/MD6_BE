@@ -84,14 +84,7 @@ class UserController {
         }
     }
 
-    // editUser = async (req: Request, res: Response) => {
-    //     try {
-    //         let user = await this.userServices.edit(req.params.idUser, req.body);
-    //         return res.status(201).json(user)
-    //     } catch (e) {
-    //         res.status(500).json(e.message)
-    //     }
-    // }
+
 
     checkOff = async (req, res) => {
         try {

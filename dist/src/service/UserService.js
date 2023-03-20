@@ -245,9 +245,8 @@ class UserServices {
             }
         };
         this.findByNameService = async (name) => {
-            let sql = `select * from user u
-                                     join post p on u.idUser = p.idUser
-                   where u.username  like '%${name}%' or p.namePost like '%${name}%'
+            let sql = `select * from post p join user u on p.idUser = u.idUser
+                   where  (u.username  like '%tu%' or p.namePost like '%tu%') and NOT u.status = 'off'
                    `;
             let seller = await this.userRepository.query(sql);
             return seller;
@@ -255,7 +254,7 @@ class UserServices {
         this.findByGenderService = async (gender) => {
             let sql = `select * from user u
                    join post p on u.idUser = p.idUser
-                   where gender = '${gender}'
+                   where gender = '${gender}' and NOT u.status = 'off'
                    `;
             let seller = await this.userRepository.query(sql);
             return seller;
@@ -264,7 +263,7 @@ class UserServices {
             let sql = `SELECT * FROM user u
                                      join post p on u.idUser = p.idUser
                    where
-                       (YEAR(CURDATE()) - YEAR(birthday)) >= '${yearOne}' and (YEAR(CURDATE()) - YEAR(birthday)) < '${yearSecond}'
+                       (YEAR(CURDATE()) - YEAR(birthday)) >= '${yearOne}' and (YEAR(CURDATE()) - YEAR(birthday)) < '${yearSecond}' and NOT u.status = 'off'
                    `;
             let seller = await this.userRepository.query(sql);
             return seller;

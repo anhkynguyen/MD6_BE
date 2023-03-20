@@ -6,7 +6,7 @@ const user_1 = require("../model/user");
 class PostService {
     constructor() {
         this.getAll2 = async () => {
-            let sql = `select * from post p join user u on p.idUser = u.idUser`;
+            let sql = `select * from post p join user u on p.idUser = u.idUser where NOT u.status = 'off'`;
             let posts = await this.postRepository.query(sql);
             console.log(posts);
             if (!posts) {
@@ -61,9 +61,7 @@ class PostService {
 
                    where p.idPost = ${idPost}`;
             let idUser = await this.postRepository.query(sql);
-            console.log(111111111111, idUser[0].idUser);
             let users = await this.userRepository.findOneBy({ idUser: idUser[0].idUser });
-            console.log(2222222222222, users);
             return users;
         };
         this.postRepository = data_source_1.AppDataSource.getRepository(post_1.Post);

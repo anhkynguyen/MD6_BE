@@ -215,32 +215,7 @@ class UserServices {
     }
 
 
-    // edit = async (id, user) => {
-    //     let checkUser = await this.userRepository.findOneBy({idUser :id})
-    //     if(!checkUser) {
-    //         return null
-    //     }
-    //     user.password = checkUser.password;
-    //     await this.userRepository.update({idUser : id},user)
-    //     checkUser = await this.userRepository.findOneBy({idUser : id})
-    //     let payload = {
-    //         idUser: checkUser.idUser,
-    //         username: checkUser.username,
-    //         role: checkUser.role
-    //     }
-    //     const token = jwt.sign(payload, SECRET, {
-    //         expiresIn: 36000000
-    //     });
-    //     let userRes = {
-    //         idUser: checkUser.idUser,
-    //         username: checkUser.username,
-    //         role: checkUser.role,
-    //         avatar: checkUser.avatar,
-    //         token : token
-    //     }
-    //     return userRes;
-    // }
-    //
+
     removeUser1 = async (id) => {
         let user = await this.userRepository.findOneBy({idUser: id});
         if (!user) {
@@ -296,9 +271,8 @@ class UserServices {
 
 
     findByNameService = async (name)=>{
-        let sql = `select * from user u
-                                     join post p on u.idUser = p.idUser
-                   where u.username  like '%${name}%' or p.namePost like '%${name}%'
+        let sql = `select * from post p join user u on p.idUser = u.idUser
+                   where  (u.username  like '%tu%' or p.namePost like '%tu%') and NOT u.status = 'off'
                    `
         let seller = await this.userRepository.query(sql);
         return seller;
@@ -310,7 +284,7 @@ class UserServices {
     findByGenderService = async (gender)=>{
         let sql = `select * from user u
                    join post p on u.idUser = p.idUser
-                   where gender = '${gender}'
+                   where gender = '${gender}' and NOT u.status = 'off'
                    `
         let seller = await this.userRepository.query(sql);
         return seller;
@@ -323,7 +297,7 @@ class UserServices {
         let sql = `SELECT * FROM user u
                                      join post p on u.idUser = p.idUser
                    where
-                       (YEAR(CURDATE()) - YEAR(birthday)) >= '${yearOne}' and (YEAR(CURDATE()) - YEAR(birthday)) < '${yearSecond}'
+                       (YEAR(CURDATE()) - YEAR(birthday)) >= '${yearOne}' and (YEAR(CURDATE()) - YEAR(birthday)) < '${yearSecond}' and NOT u.status = 'off'
                    `
         let seller = await this.userRepository.query(sql);
         return seller;
