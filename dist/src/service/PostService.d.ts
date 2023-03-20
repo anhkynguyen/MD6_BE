@@ -2,7 +2,8 @@ declare class PostService {
     private postRepository;
     private userRepository;
     constructor();
-    getAll2: () => Promise<any>;
+    count: () => Promise<any>;
+    getAll2: (limit: any, offset: any) => Promise<any>;
     findById: (id: any) => Promise<any>;
     save: (post: any) => Promise<any>;
     get12Post: () => Promise<any>;

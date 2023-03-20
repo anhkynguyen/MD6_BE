@@ -5,11 +5,16 @@ const post_1 = require("../model/post");
 const user_1 = require("../model/user");
 class PostService {
     constructor() {
-        this.getAll2 = async () => {
+        this.count = async () => {
+            let sql = `select count(idPost) from post `;
+            let count = await this.postRepository.query(sql);
+            return count;
+        };
+        this.getAll2 = async (limit, offset) => {
             let sql = `select *
                    from post p
                             join user u on p.idUser = u.idUser
-                   where NOT u.status = 'off'`;
+                   where NOT u.status = 'off' limit ${limit} offset ${offset}`;
             let posts = await this.postRepository.query(sql);
             console.log(posts);
             if (!posts) {

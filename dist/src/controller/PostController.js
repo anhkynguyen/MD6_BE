@@ -9,9 +9,45 @@ class PostController {
     constructor() {
         this.getAllPosts = async (req, res) => {
             try {
+                let limit = 8;
+                let offset = 0;
+                let page = 1;
+                if (req.query.page) {
+                    page = +req.query.page;
+                    offset = (+page - 1) * limit;
+                }
+                let totalPost = await PostService_2.default.count();
+                const count = parseInt(totalPost[0]['count(idFood)']);
+                let totalPage = Math.ceil(count / limit);
+                let posts = await PostService_2.default.getAll2(limit, offset);
                 let data;
                 let orders;
-                let posts = await this.postService.getAll2();
+                if (req["decoded"]) {
+                    data = [posts, orders];
+                }
+                else {
+                }
+                res.status(200).json(posts);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.getAllPosts2 = async (req, res) => {
+            try {
+                let limit = 6;
+                let offset = 0;
+                let page = 1;
+                if (req.query.page) {
+                    page = +req.query.page;
+                    offset = (+page - 1) * limit;
+                }
+                let totalPost = await PostService_2.default.count();
+                const count = parseInt(totalPost[0]['count(idFood)']);
+                let totalPage = Math.ceil(count / limit);
+                let posts = await PostService_2.default.getAll2(limit, offset);
+                let data;
+                let orders;
                 if (req["decoded"]) {
                     data = [posts, orders];
                 }
