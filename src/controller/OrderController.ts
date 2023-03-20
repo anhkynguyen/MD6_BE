@@ -73,8 +73,6 @@ class OrderController {
             let checkOrder = await this.orderService.getOrderInDay(order.idPost, order.starTime)
 
 
-
-
             let x = new Date(order.endTime)
             let y = new Date(order.starTime)
             order.dateOfOrder = new Date()
@@ -83,7 +81,7 @@ class OrderController {
 
             if (checkOrder == false) {
                 res.json(" Bạn chưa thể thuê dịch vụ")
-            } else if (checkOrder == true){
+            } else if (checkOrder == true) {
                 if (y.getDate() > (order.dateOfOrder).getDate()) {
                     if (z === 0) {
                         order.total = ((x.getDate() - y.getDate()) * 24 + (x.getHours() - y.getHours())) * price
@@ -135,8 +133,6 @@ class OrderController {
             res.status(500).json(e.message)
         }
     }
-
-
 }
 
 export default new OrderController();

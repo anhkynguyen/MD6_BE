@@ -6,7 +6,10 @@ const user_1 = require("../model/user");
 class PostService {
     constructor() {
         this.getAll2 = async () => {
-            let sql = `select * from post p join user u on p.idUser = u.idUser where NOT u.status = 'off'`;
+            let sql = `select *
+                   from post p
+                            join user u on p.idUser = u.idUser
+                   where NOT u.status = 'off'`;
             let posts = await this.postRepository.query(sql);
             console.log(posts);
             if (!posts) {
@@ -15,7 +18,10 @@ class PostService {
             return posts;
         };
         this.findById = async (id) => {
-            let sql = `select * from user u join post p on u.idUser = p.idUser  where p.idPost = ${id}`;
+            let sql = `select *
+                   from user u
+                            join post p on u.idUser = p.idUser
+                   where p.idPost = ${id}`;
             let post = await this.postRepository.query(sql);
             return post;
         };
@@ -23,7 +29,9 @@ class PostService {
             return this.postRepository.save(post);
         };
         this.get12Post = async () => {
-            let sql = `SELECT * FROM post ORDER BY date DESC limit 12`;
+            let sql = `SELECT *
+                   FROM post
+                   ORDER BY date DESC limit 12`;
             return this.postRepository.query(sql);
         };
         this.updatePost = async (idPost, newPost) => {
@@ -44,10 +52,10 @@ class PostService {
         };
         this.checkUser1 = async (idUser, idPost) => {
             let sql = `select u.idUser
-                      from user u
-                         join post p on p.idUser = u.idUser
+                   from user u
+                            join post p on p.idUser = u.idUser
 
-                where p.idPost = ${idPost}`;
+                   where p.idPost = ${idPost}`;
             let checkIdUser = await this.postRepository.query(sql);
             if (checkIdUser[0].idUser === idUser) {
                 return true;

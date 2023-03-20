@@ -10,7 +10,7 @@ class OrderService {
                             join post p on o.idPost = p.idPost
                             join user u on p.idUser = u.idUser
                             join provision pr on o.idProvision = pr.idProvision
-                   `;
+        `;
             let orders = await this.orderRepository.query(sql);
             console.log(orders);
             if (!orders) {
@@ -19,10 +19,11 @@ class OrderService {
             return orders;
         };
         this.getOrderInUserService = async (id) => {
-            let sql = `select * from orders o
-                                     join post p on o.idPost = p.idPost
-                                     join user u on p.idUser = u.idUser
-                                     join provision pr on o.idProvision = pr.idProvision
+            let sql = `select *
+                   from orders o
+                            join post p on o.idPost = p.idPost
+                            join user u on p.idUser = u.idUser
+                            join provision pr on o.idProvision = pr.idProvision
                    where o.idUser = ${id}`;
             let orders = await this.orderRepository.query(sql);
             if (!orders) {
@@ -31,11 +32,12 @@ class OrderService {
             return orders;
         };
         this.getOrderInSellerService = async (id) => {
-            let sql = `select * from orders o
-                                     join post p on o.idPost = p.idPost
-                                     join user u on p.idUser = u.idUser
-                                     join provision pr on o.idProvision = pr.idProvision
-                   where  o.idPost  = ${id}`;
+            let sql = `select *
+                   from orders o
+                            join post p on o.idPost = p.idPost
+                            join user u on p.idUser = u.idUser
+                            join provision pr on o.idProvision = pr.idProvision
+                   where o.idPost = ${id}`;
             let orders = await this.orderRepository.query(sql);
             if (!orders) {
                 return 'No posts found';
@@ -58,11 +60,13 @@ class OrderService {
             }
         };
         this.getOrderInDay = async (id, time) => {
-            let sql = `select * from orders o
-                                     join post p on o.idPost = p.idPost
-                                     join user u on p.idUser = u.idUser
-                                     join provision pr on o.idProvision = pr.idProvision
-                   where  o.idPost  = ${id} and o.endTime > '${time}'`;
+            let sql = `select *
+                   from orders o
+                            join post p on o.idPost = p.idPost
+                            join user u on p.idUser = u.idUser
+                            join provision pr on o.idProvision = pr.idProvision
+                   where o.idPost = ${id}
+                     and o.endTime > '${time}'`;
             let orders = await this.orderRepository.query(sql);
             if (orders.length == 0) {
                 return true;

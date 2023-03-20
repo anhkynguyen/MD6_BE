@@ -18,15 +18,20 @@ class UserServices {
 
     getAll1 = async () => {
         let sql = `select *
-                   from user where NOT user.role = 'admin'
-                   `
+                   from user
+                   where NOT user.role = 'admin'
+        `
         let users = await this.userRepository.query(sql);
         return users;
     }
 
 
     getUserRequest = async () => {
-        let sql = `select * from user u where u.ask = 'Yes' and NOT  u.role = 'admin' and NOT u.role ='seller'`
+        let sql = `select *
+                   from user u
+                   where u.ask = 'Yes'
+                     and NOT u.role = 'admin'
+                     and NOT u.role = 'seller'`
         let users = await this.userRepository.query(sql);
         return users;
     }
@@ -48,12 +53,6 @@ class UserServices {
     }
 
 
-
-
-
-
-
-
     checkOldPassword1 = async (idUser, password) => {
         let userCheck = await this.userRepository.findOneBy({idUser: idUser});
         if (!userCheck) {
@@ -67,7 +66,6 @@ class UserServices {
             }
         }
     }
-
 
 
     changePassword = async (idUser, password) => {
@@ -215,7 +213,6 @@ class UserServices {
     }
 
 
-
     removeUser1 = async (id) => {
         let user = await this.userRepository.findOneBy({idUser: id});
         if (!user) {
@@ -232,14 +229,13 @@ class UserServices {
         if (!checkUser) {
             return null
         } else {
-            if ( year - checkUser.birthday.split('-')[0] > 18){
+            if (year - checkUser.birthday.split('-')[0] > 18) {
                 if (checkUser.ask === 'No') {
                     checkUser.ask = 'Yes'
                     await this.userRepository.save(checkUser)
 
                 }
-            }
-            else {
+            } else {
                 return 'Bạn chưa đủ tuổi'
             }
 
@@ -270,35 +266,38 @@ class UserServices {
     }
 
 
-    findByNameService = async (name)=>{
-        let sql = `select * from post p join user u on p.idUser = u.idUser
-                   where  (u.username  like '%tu%' or p.namePost like '%tu%') and NOT u.status = 'off'
-                   `
+    findByNameService = async (name) => {
+        let sql = `select *
+                   from post p
+                            join user u on p.idUser = u.idUser
+                   where (u.username like '%tu%' or p.namePost like '%tu%')
+                     and NOT u.status = 'off'
+        `
         let seller = await this.userRepository.query(sql);
         return seller;
     }
 
 
-
-
-    findByGenderService = async (gender)=>{
-        let sql = `select * from user u
-                   join post p on u.idUser = p.idUser
-                   where gender = '${gender}' and NOT u.status = 'off'
-                   `
+    findByGenderService = async (gender) => {
+        let sql = `select *
+                   from user u
+                            join post p on u.idUser = p.idUser
+                   where gender = '${gender}'
+                     and NOT u.status = 'off'
+        `
         let seller = await this.userRepository.query(sql);
         return seller;
     }
 
 
-
-
-    findByBirthdayService = async (yearOne,yearSecond)=>{
-        let sql = `SELECT * FROM user u
-                                     join post p on u.idUser = p.idUser
-                   where
-                       (YEAR(CURDATE()) - YEAR(birthday)) >= '${yearOne}' and (YEAR(CURDATE()) - YEAR(birthday)) < '${yearSecond}' and NOT u.status = 'off'
-                   `
+    findByBirthdayService = async (yearOne, yearSecond) => {
+        let sql = `SELECT *
+                   FROM user u
+                            join post p on u.idUser = p.idUser
+                   where (YEAR(CURDATE()) - YEAR (birthday)) >= '${yearOne}'
+                     and (YEAR(CURDATE()) - YEAR (birthday)) < '${yearSecond}'
+                     and NOT u.status = 'off'
+        `
         let seller = await this.userRepository.query(sql);
         return seller;
     }
