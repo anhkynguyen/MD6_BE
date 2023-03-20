@@ -30,13 +30,13 @@ __decorate([
     __metadata("design:type", Number)
 ], Orders.prototype, "idPost", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Orders.prototype, "time", void 0);
+    (0, typeorm_1.Column)({ type: "text" }),
+    __metadata("design:type", String)
+], Orders.prototype, "endTime", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
-], Orders.prototype, "date", void 0);
+], Orders.prototype, "starTime", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: "Wait" }),
     __metadata("design:type", String)

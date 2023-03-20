@@ -10,10 +10,10 @@ export class Orders {
     idUser: number
     @Column()
     idPost: number;
-    @Column()
-    time: number;
     @Column({ type: "text" })
-    date: string;
+    endTime: string;
+    @Column({ type: "text" })
+    starTime: string;
     @Column({ default: "Wait" })
     status: string;
     @Column({

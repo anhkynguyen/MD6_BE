@@ -3,8 +3,8 @@ export declare class Orders {
     idProvision: number;
     idUser: number;
     idPost: number;
-    time: number;
-    date: string;
+    endTime: string;
+    starTime: string;
     status: string;
     dateOfOrder: Date;
     total: number;

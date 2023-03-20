@@ -46,9 +46,7 @@ class OrderService {
             return this.orderRepository.save(order);
         };
         this.changeStatusOrder = async (id) => {
-            console.log(1111111111, id);
             let checkOrder = await this.orderRepository.findOneBy({ idOrder: id });
-            console.log(2222222222, checkOrder);
             if (!checkOrder) {
                 return null;
             }
@@ -57,6 +55,20 @@ class OrderService {
                     checkOrder.status = 'Approved';
                     await this.orderRepository.save(checkOrder);
                 }
+            }
+        };
+        this.getOrderInDay = async (id, time) => {
+            let sql = `select * from orders o
+                                     join post p on o.idPost = p.idPost
+                                     join user u on p.idUser = u.idUser
+                                     join provision pr on o.idProvision = pr.idProvision
+                   where  o.idPost  = ${id} and o.endTime > '${time}'`;
+            let orders = await this.orderRepository.query(sql);
+            if (orders.length == 0) {
+                return true;
+            }
+            else {
+                return false;
             }
         };
         this.orderRepository = data_source_1.AppDataSource.getRepository(order_1.Orders);
