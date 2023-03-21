@@ -31,6 +31,7 @@ class PostService {
             return post;
         };
         this.save = async (post) => {
+            console.log(2222222222, post);
             return this.postRepository.save(post);
         };
         this.get12Post = async () => {
@@ -68,14 +69,13 @@ class PostService {
             return false;
         };
         this.checkSeller = async (idPost) => {
-            let sql = `select u.idUser
+            let sql = `select *
                    from user u
                             join post p on p.idUser = u.idUser
 
                    where p.idPost = ${idPost}`;
-            let idUser = await this.postRepository.query(sql);
-            let users = await this.userRepository.findOneBy({ idUser: idUser[0].idUser });
-            return users;
+            let profile = await this.postRepository.query(sql);
+            return profile;
         };
         this.postRepository = data_source_1.AppDataSource.getRepository(post_1.Post);
         this.userRepository = data_source_1.AppDataSource.getRepository(user_1.User);

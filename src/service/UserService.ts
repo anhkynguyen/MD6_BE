@@ -67,9 +67,7 @@ class UserServices {
         }
     }
 
-
     changePassword = async (idUser, password) => {
-
         let user = await this.userRepository.findOneBy({idUser: idUser});
         if (!user) {
             return "User not found";
@@ -89,7 +87,7 @@ class UserServices {
     }
 
     checkUser = async (user) => {
-        let userCheck = await this.userRepository.findOneBy({username: user.username});
+        let userCheck = await this.userRepository.findOneBy({gmail: user.gmail});
         if (!userCheck) {
             return "User not found";
         } else {
@@ -125,8 +123,6 @@ class UserServices {
                 }
             }
         }
-
-
     }
 
 
@@ -142,10 +138,8 @@ class UserServices {
             } else {
                 checkUser.status = 'active'
                 await this.userRepository.save(checkUser)
-
             }
         }
-
     }
 
 
@@ -270,7 +264,7 @@ class UserServices {
         let sql = `select *
                    from post p
                             join user u on p.idUser = u.idUser
-                   where (u.username like '%tu%' or p.namePost like '%tu%')
+                   where (u.username like '%${name}%' or p.namePost like '%${name}%')
                      and NOT u.status = 'off'
         `
         let seller = await this.userRepository.query(sql);

@@ -46,6 +46,7 @@ class PostService {
 
 
     save = async (post) => {
+        console.log(2222222222,post)
         return this.postRepository.save(post);
     };
 
@@ -101,16 +102,16 @@ class PostService {
 
 
     checkSeller = async (idPost) => {
-        let sql = `select u.idUser
+        let sql = `select *
                    from user u
                             join post p on p.idUser = u.idUser
 
                    where p.idPost = ${idPost}`;
-        let idUser = await this.postRepository.query(sql);
+        let profile = await this.postRepository.query(sql);
 
-        let users = await this.userRepository.findOneBy({idUser: idUser[0].idUser});
+        // let users = await this.userRepository.findOneBy({idUser: idUser[0].idUser});
 
-        return users
+        return profile
     }
 
 

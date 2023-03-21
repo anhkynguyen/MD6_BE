@@ -71,6 +71,7 @@ class UserController {
 
 
     login = async (req: Request, res: Response) => {
+        console.log(1111111111111,req.body)
 
 
         try {
