@@ -23,8 +23,9 @@ class PostController {
                 offset = (+page - 1) * limit;
             }
             let totalPost = await postService.count();
-            const count = parseInt(totalPost[0]['count(idFood)']);
+            const count = parseInt(totalPost[0]['count(idPost)']);
             let totalPage = Math.ceil( count/limit);
+
             let posts = await postService.getAll2(limit, offset);
             let data;
             let orders;
@@ -37,7 +38,11 @@ class PostController {
                 // data = [posts];
 
             }
-            res.status(200).json(posts);
+            res.status(200).json({posts:posts,
+                currentPage: page,
+                totalPage: totalPage
+            }
+        );
         } catch (e) {
             res.status(500).json(e.message)
         }

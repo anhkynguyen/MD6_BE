@@ -60,6 +60,7 @@ class OrderService {
             }
         };
         this.getOrderInDay = async (id, time) => {
+            console.log(111111111111, time);
             let sql = `select *
                    from orders o
                             join post p on o.idPost = p.idPost

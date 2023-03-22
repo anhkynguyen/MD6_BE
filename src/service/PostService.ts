@@ -19,6 +19,7 @@ class PostService {
     count=async ()=>{
         let sql=`select count(idPost) from post `
         let count=await this.postRepository.query(sql)
+
         return count
     }
 
