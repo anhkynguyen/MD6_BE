@@ -47,7 +47,7 @@ class PostService {
 
 
     save = async (post) => {
-        console.log(2222222222,post)
+
         return this.postRepository.save(post);
     };
 

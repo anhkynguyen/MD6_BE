@@ -50,12 +50,6 @@ class OrderController {
                 let x = new Date(order.endTime);
                 let y = new Date(order.starTime);
                 order.dateOfOrder = new Date();
-                if (y > x) {
-                    console.log(55555555, false);
-                }
-                else {
-                    console.log(66666666666, true);
-                }
                 let z = (x.getMinutes() - y.getMinutes());
                 if (y > x) {
                     res.json("chonj sai roi");
